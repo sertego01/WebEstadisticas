@@ -1,0 +1,59 @@
+/* Estilo general para modo claro */
+.light-mode {
+  background-color: white;
+  color: black;
+}
+
+/* Estilo general para modo oscuro */
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Transición entre modos */
+.light-mode,
+.dark-mode {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Encabezado principal */
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  padding: 20px;
+}
+
+/* Enlace principal */
+.App-link {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.App-link:hover {
+  color: #357abd;
+}
+
+/* Modo oscuro para enlaces */
+.dark-mode .App-link {
+  color: #61dafb;
+}
+
+.dark-mode .App-link:hover {
+  color: #357abd;
+}
+
+/* Animación opcional */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
