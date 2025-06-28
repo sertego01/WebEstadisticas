@@ -42,7 +42,14 @@ function App() {
           <Route path="/add-player" element={<AddPlayer />} />
           <Route path="/player-stats" element={<PlayerStats />} />
           <Route path="/add-match" element={<AddMatch />} />
-          <Route path="*" element={<p>Selecciona una opción del menú</p>} />
+          <Route
+            path="*"
+            element={
+              <p style={{ textAlign: "center", color: "red" }}>
+                Página no encontrada. Por favor, selecciona una opción válida del menú.
+              </p>
+            }
+          />
         </Routes>
       </Layout>
     </Router>

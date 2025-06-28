@@ -6,6 +6,8 @@ const AddPlayer = () => {
   const [position, setPosition] = useState("");
   const [message, setMessage] = useState("");
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -16,7 +18,7 @@ const AddPlayer = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/players", {
+      const res = await fetch(`${API_BASE_URL}/api/players`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, number: Number(number), position }),

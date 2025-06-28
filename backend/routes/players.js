@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Eliminar jugador
+// Eliminar jugador y sus partidos
 router.delete("/:id", async (req, res) => {
   try {
     const playerId = req.params.id;
@@ -66,7 +66,7 @@ router.get("/:id/stats", async (req, res) => {
       },
     ]);
 
-    // Si no hay partidos, devolver estadísticas con valores iniciales
+    // Si no hay partidos, devolver estadísticas iniciales
     const playerStats = stats.length > 0 ? stats[0] : {
       goals: 0,
       assists: 0,
@@ -75,11 +75,11 @@ router.get("/:id/stats", async (req, res) => {
       redCards: 0,
     };
 
-    // Añadir partidos jugados desde el campo matchesPlayed del jugador
+    // Enviar la respuesta incluyendo partidos jugados del jugador
     res.json({
       _id: playerId,
       name: player.name,
-      matchesPlayed: player.matchesPlayed, // Incluye los partidos jugados
+      matchesPlayed: player.matchesPlayed,
       ...playerStats,
     });
   } catch (error) {

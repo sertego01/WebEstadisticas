@@ -10,13 +10,15 @@ const AddMatch = () => {
   const [redCards, setRedCards] = useState(0);
   const [message, setMessage] = useState("");
 
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+
   useEffect(() => {
     // Cargar lista de jugadores
-    fetch("http://localhost:5000/api/players")
+    fetch(`${API_BASE_URL}/api/players`)
       .then((res) => res.json())
       .then((data) => setPlayers(data))
       .catch(() => setMessage("Error cargando jugadores"));
-  }, []);
+  }, [API_BASE_URL]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const AddMatch = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/matches", {
+      const res = await fetch(`${API_BASE_URL}/api/matches`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

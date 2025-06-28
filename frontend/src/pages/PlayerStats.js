@@ -6,20 +6,21 @@ const PlayerStats = () => {
   const [stats, setStats] = useState(null);
   const [message, setMessage] = useState("");
 
+  const API_BASE_URL =
+    process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/players")
+    fetch(`${API_BASE_URL}/api/players`)
       .then((res) => res.json())
       .then((data) => setPlayers(data))
       .catch(() => setMessage("Error cargando jugadores"));
-  }, []);
+  }, [API_BASE_URL]);
 
   const fetchStats = async (playerId) => {
     setMessage("");
     setStats(null);
     try {
-      const res = await fetch(
-        `http://localhost:5000/api/players/${playerId}/stats`
-      );
+      const res = await fetch(`${API_BASE_URL}/api/players/${playerId}/stats`);
       if (res.ok) {
         const data = await res.json();
         setStats(data);
@@ -46,13 +47,11 @@ const PlayerStats = () => {
       return;
     }
 
-    // Primera confirmación
     const confirm1 = window.confirm(
       "¿Estás seguro de que deseas eliminar este jugador?"
     );
     if (!confirm1) return;
 
-    // Segunda confirmación
     const confirm2 = window.confirm(
       "Esta acción es irreversible. ¿Deseas continuar?"
     );
@@ -60,7 +59,7 @@ const PlayerStats = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/players/${selectedPlayerId}`,
+        `${API_BASE_URL}/api/players/${selectedPlayerId}`,
         {
           method: "DELETE",
         }
@@ -146,13 +145,17 @@ const PlayerStats = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ padding: "8px", textAlign: "left" }}>Asistencias</td>
+                <td style={{ padding: "8px", textAlign: "left" }}>
+                  Asistencias
+                </td>
                 <td style={{ padding: "8px", textAlign: "right" }}>
                   {stats.assists}
                 </td>
               </tr>
               <tr>
-                <td style={{ padding: "8px", textAlign: "left" }}>Partidos Jugados</td>
+                <td style={{ padding: "8px", textAlign: "left" }}>
+                  Partidos Jugados
+                </td>
                 <td style={{ padding: "8px", textAlign: "right" }}>
                   {stats.matchesPlayed}
                 </td>
@@ -164,19 +167,26 @@ const PlayerStats = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ padding: "8px", textAlign: "left"}}>% Minutos</td>
+                <td style={{ padding: "8px", textAlign: "left" }}>% Minutos</td>
                 <td style={{ padding: "8px", textAlign: "right" }}>
-                  {((stats.minutes / (stats.matchesPlayed * 80)) * 100).toFixed(2)}%
+                  {((stats.minutes / (stats.matchesPlayed * 80)) * 100).toFixed(
+                    2
+                  )}
+                  %
                 </td>
               </tr>
               <tr>
-                <td style={{ padding: "8px", textAlign: "left" }}>Tarjetas amarillas</td>
+                <td style={{ padding: "8px", textAlign: "left" }}>
+                  Tarjetas amarillas
+                </td>
                 <td style={{ padding: "8px", textAlign: "right" }}>
                   {stats.yellowCards}
                 </td>
               </tr>
               <tr>
-                <td style={{ padding: "8px", textAlign: "left" }}>Tarjetas rojas</td>
+                <td style={{ padding: "8px", textAlign: "left" }}>
+                  Tarjetas rojas
+                </td>
                 <td style={{ padding: "8px", textAlign: "right" }}>
                   {stats.redCards}
                 </td>

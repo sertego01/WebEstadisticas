@@ -6,7 +6,7 @@ const Player = require("../models/Player");
 // Añadir un partido
 router.post("/", async (req, res) => {
   try {
-    const { player, goals, assists, minutes, yellowCards, redCards } = req.body;
+    const { player, goals = 0, assists = 0, minutes = 0, yellowCards = 0, redCards = 0 } = req.body;
 
     // Validar que el jugador exista
     const playerExists = await Player.findById(player);
